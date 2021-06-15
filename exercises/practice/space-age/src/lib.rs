@@ -12,17 +12,26 @@ const NEPTUNE_SECONDS: f64 = 5200418560.032001;
 
 #[derive(Debug)]
 pub struct Duration {
-    seconds: u64,
+    seconds: f64,
 }
 
 impl From<u64> for Duration {
     fn from(s: u64) -> Self {
+        Duration { seconds: s as f64 }
+    }
+}
+
+impl From<f64> for Duration {
+    fn from(s: f64) -> Self {
         Duration { seconds: s }
     }
 }
 
 pub trait Planet {
-    fn years_during(d: &Duration) -> f64;
+    fn orbital_duration() -> Duration;
+    fn years_during(d: &Duration) -> f64 {
+        d.seconds / Self::orbital_duration().seconds
+    }
 }
 
 pub struct Mercury;
@@ -35,42 +44,42 @@ pub struct Uranus;
 pub struct Neptune;
 
 impl Planet for Mercury {
-    fn years_during(d: &Duration) -> f64 {
-        f64::trunc((d.seconds as f64 / MERCURY_SECONDS * 100.0).round()) / 100.0
+    fn orbital_duration() -> Duration {
+        Duration::from(MERCURY_SECONDS)
     }
 }
 impl Planet for Venus {
-    fn years_during(d: &Duration) -> f64 {
-        f64::trunc((d.seconds as f64 / VENUS_SECONDS * 100.0).round()) / 100.0
+    fn orbital_duration() -> Duration {
+        Duration::from(VENUS_SECONDS)
     }
 }
 impl Planet for Earth {
-    fn years_during(d: &Duration) -> f64 {
-        f64::trunc((d.seconds as f64 / EARTH_SECONDS * 100.0).round()) / 100.0
+    fn orbital_duration() -> Duration {
+        Duration::from(EARTH_SECONDS)
     }
 }
 impl Planet for Mars {
-    fn years_during(d: &Duration) -> f64 {
-        f64::trunc((d.seconds as f64 / MARS_SECONDS * 100.0).round()) / 100.0
+    fn orbital_duration() -> Duration {
+        Duration::from(MARS_SECONDS)
     }
 }
 impl Planet for Jupiter {
-    fn years_during(d: &Duration) -> f64 {
-        f64::trunc((d.seconds as f64 / JUPITER_SECONDS * 100.0).round()) / 100.0
+    fn orbital_duration() -> Duration {
+        Duration::from(JUPITER_SECONDS)
     }
 }
 impl Planet for Saturn {
-    fn years_during(d: &Duration) -> f64 {
-        f64::trunc((d.seconds as f64 / SATURN_SECONDS * 100.0).round()) / 100.0
+    fn orbital_duration() -> Duration {
+        Duration::from(SATURN_SECONDS)
     }
 }
 impl Planet for Uranus {
-    fn years_during(d: &Duration) -> f64 {
-        f64::trunc((d.seconds as f64 / URANUS_SECONDS * 100.0).round()) / 100.0
+    fn orbital_duration() -> Duration {
+        Duration::from(URANUS_SECONDS)
     }
 }
 impl Planet for Neptune {
-    fn years_during(d: &Duration) -> f64 {
-        f64::trunc((d.seconds as f64 / NEPTUNE_SECONDS * 100.0).round()) / 100.0
+    fn orbital_duration() -> Duration {
+        Duration::from(NEPTUNE_SECONDS)
     }
 }
