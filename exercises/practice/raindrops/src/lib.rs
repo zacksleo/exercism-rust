@@ -12,7 +12,7 @@ pub fn raindrops(n: u32) -> String {
         res.push_str("Plong");
     }
 
-    if res.len() == 0 {
+    if res.is_empty() {
         res.push_str(&n.to_string());
     }
     res
