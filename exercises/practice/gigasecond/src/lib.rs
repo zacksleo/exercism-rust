@@ -1,6 +1,6 @@
-use chrono::{DateTime, TimeZone, Utc};
+use chrono::{DateTime, Duration, Utc};
 
 // Returns a Utc DateTime one billion seconds after start.
 pub fn after(start: DateTime<Utc>) -> DateTime<Utc> {
-    return Utc.timestamp_millis(start.timestamp_millis() + 1_000_000_000_000);
+    start + Duration::seconds(1_000_000_000)
 }
