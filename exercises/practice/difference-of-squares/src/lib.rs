@@ -1,9 +1,10 @@
 pub fn square_of_sum(n: u32) -> u32 {
-    (1 + n) * n  * (1 + n) * n / 4
+    (n*(1 + n)/2).pow(2)
 }
 
+// https://en.wikipedia.org/wiki/Square_pyramidal_number
 pub fn sum_of_squares(n: u32) -> u32 {
-    (0..n + 1).fold(0, |sum, i| sum + i*i)
+    n*(n+1)*(2*n+1)/6
 }
 
 pub fn difference(n: u32) -> u32 {
